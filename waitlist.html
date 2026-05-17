@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Alpha — Akhrot Waitlist</title>
+  <meta name="description" content="Be among the first to experience nature-inspired intelligence. Join the Akhrot alpha waitlist." />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.3.2/pixi.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
+</head>
+<body class="has-particles">
+
+  <!-- Particle Field -->
+  <canvas id="grid-canvas" aria-hidden="true"></canvas>
+
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <nav id="navbar">
+    <div class="nav-pill nav-main">
+      <a href="index.html" class="nav-logo"><img src="LOGO.svg" alt="Akhrot" class="logo-img"/></a>
+      <ul class="nav-links">
+        <li><a href="what.html" data-magnetic>What is Akhrot</a></li>
+        <li><a href="about.html" data-magnetic>About</a></li>
+        <li><a href="community.html" data-magnetic>Community</a></li>
+      </ul>
+    </div>
+    <div class="nav-pill nav-cta"><a href="waitlist.html" class="cta-link" data-magnetic>WAITLIST</a></div>
+  </nav>
+
+  <div class="page-wrapper" style="display:flex;align-items:center;justify-content:center;min-height:100vh">
+    <div class="page-container" style="max-width:700px">
+
+      <div class="fade-in" style="text-align:center;margin-bottom:3rem">
+        <p class="page-eyebrow" style="text-align:center">Alpha Access</p>
+        <h1 class="page-heading" style="text-align:center;font-size:clamp(2.5rem,5vw,4rem)">Join the Alpha</h1>
+        <p style="color:var(--ink-dim);font-size:1rem">Be among the first to experience nature-inspired intelligence.</p>
+      </div>
+
+      <!-- 2.5D Form Card -->
+      <div class="form-scene fade-in">
+        <div class="form-card-3d glass-panel" style="position:relative">
+          <form class="waitlist-form" id="waitlist-form">
+            <div class="input-group">
+              <input type="text" id="name" required />
+              <label for="name">Name</label>
+            </div>
+            <div class="input-group">
+              <input type="email" id="email" required />
+              <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+              <input type="text" id="role" required />
+              <label for="role">Role / Interest</label>
+            </div>
+            <div class="input-group">
+              <input type="text" id="reason" required />
+              <label for="reason">Why are you interested in Akhrot?</label>
+            </div>
+            <button type="submit" class="cta-link" style="width:100%;margin-top:1rem;border:none;cursor:none" data-magnetic>Request Access</button>
+          </form>
+          <div class="success-message" id="success-msg" style="display:none; text-align:center;">
+            <h3>You're on the list.</h3>
+            <p style="color:var(--ink-dim);margin-top:0.5rem;">Keep an eye on your inbox.</p>
+          </div>
+          
+          <script>
+            document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+              e.preventDefault();
+              this.style.display = 'none';
+              document.getElementById('success-msg').style.display = 'block';
+            });
+          </script>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer id="main-footer"></footer>
+
+  <script src="script.js"></script>
+  <script src="footer-inject.js"></script>
+  <script src="animations.js"></script>
+  <script>
+  (function(){
+    'use strict';
+
+    /* ─── 2.5D Tilt ─── */
+    const card = document.querySelector('.form-card-3d');
+    if (!card) return;
+    const scene = card.parentElement;
+    scene.addEventListener('mousemove', e => {
+      const r = scene.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `rotateY(${x*12}deg) rotateX(${-y*8}deg)`;
+    });
+    scene.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateY(0) rotateX(0)';
+    });
+  })();
+  </script>
+</body>
+</html>
